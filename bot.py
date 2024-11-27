@@ -17,7 +17,7 @@ async def button_handler(update, context):
     await query.answer()
     if query.data == "buy_money":
         await query.message.reply_text("какую суму ты хочешь купить")
-elif query.data == ("menu")
+elif query.data == "menu":
    await query.message.reply_text("я тебе предлогаю посмотреть что ты можешь купить")
     application = Application.builder().token('7917032400:AAEVGpD2MQ7y4e3ndYGZzAOWzXa5N3vQbGQ').build()
     application.add_handler(CommandHandler("start", start))
