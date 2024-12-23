@@ -6,14 +6,27 @@ application = Application.builder().token('7917032400:AAEVGpD2MQ7y4e3ndYGZzAOWzX
 
 
 # Функция для команды /start
+
 async def start(update, context):
+    username = update.effective_user.username or "NoUsername"
+    chat_id = update.effective_user.id
+
+
+    add_user(username, chat_id)
+    inline_keyboard = [
+        [InlineKeyboardButton("Покупка монет", callback_data="buy_money")]
+        [InlineKeyboardButton("Меню", callback_data="menu")]
+    ]    
+    markup = InlineKeyboardMarkup(inline_keyboard)
+    
+    await update.message.reply_text(
+        "Добро пожаловать в мой бот Drakon41ik",
+        reply_markup=markup
+    
     welcome_message = (
         "Привет! Меня зовут 'Drakon41ik'!\n"
         "Я помогу тебе выбрать, что ты хочешь купить.\n"
-        "Попробуй следующие команды:\n"
-        "/menu - покажет все команды\n"
-        "/buy_money - купить монеты\n"
-        "/help - подсказка по доступным командам"
+
     )
     await update.message.reply_text(welcome_message)
 
@@ -115,4 +128,3 @@ setup_database()
 
 if __name__ == "__main__":
     application.run_polling()
-    
