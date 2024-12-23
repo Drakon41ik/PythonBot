@@ -4,8 +4,9 @@ import sqlite3
 
 application = Application.builder().token('7917032400:AAEVGpD2MQ7y4e3ndYGZzAOWzXa5N3vQbGQ').build()
 
+
 # Функция для команды /start
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def start(update, context):
     welcome_message = (
         "Привет! Меня зовут 'Drakon41ik'!\n"
         "Я помогу тебе выбрать, что ты хочешь купить.\n"
@@ -45,7 +46,7 @@ def setup_database():
     print("База данных успешно настроена")
 
 # Добавление пользователя в базу данных
-def add_user(username: str, chat_id: int):
+def add_user(username, chat_id):
     connection = sqlite3.connect("database.db")
     cursor = connection.cursor()
     try:
@@ -61,7 +62,7 @@ def add_user(username: str, chat_id: int):
         connection.close()
 
 # Добавление бронирования в базу данных
-def add_booking(chat_id: int, start: str, buy_money: str):
+def add_booking(chat_id, start, buy_money):
     connection = sqlite3.connect("database.db")
     cursor = connection.cursor()
     try:
@@ -83,7 +84,7 @@ def add_booking(chat_id: int, start: str, buy_money: str):
         connection.close()
 
 # Обработка кнопок
-async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def button_handler(update, context):
     query = update.callback_query
     await query.answer()
     if query.data == "buy_money":
@@ -92,7 +93,7 @@ async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text("Я предлагаю посмотреть, что вы можете купить.")
 
 # Отправка фотографий
-async def send_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+async def send_photo(update, context):
     photo_paths = ["img/для_серва.png"]
 
     try:
